@@ -14,7 +14,7 @@ figure(1)
 
 
 for i = 1 : generation
-    vuelta = i
+    
     [initpop, suma_acumulada] = probabilidad(initpop, func)
     elitepop = elite(initpop)
     initpop = sel(initpop,suma_acumulada)
