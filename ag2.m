@@ -14,15 +14,17 @@ figure(1)
 
 
 for i = 1 : generation
-    
+    vuelta = i
     [initpop, suma_acumulada] = probabilidad(initpop, func)
     elitepop = elite(initpop)
     initpop = sel(initpop,suma_acumulada)
     [cruzapop, initpop] = crossover(porcxover,initpop, func)
-    mutpop = step_mutation(porcmut,initpop, bounds)    
+    mutpop = step_mutation(porcmut,initpop, bounds, popsize);
+    
+    mutpop = func(mutpop(:,1:end-1))
     
     initpop = [cruzapop; mutpop];
-    initpop = sortrows(initpop, 3);
+    initpop = sortrows(initpop, size(initpop,2))
     
     for I = 1 : size(elitepop,1)
      initpop(I,:) = [];     

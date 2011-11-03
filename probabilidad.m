@@ -18,7 +18,7 @@ function [ initpop, suma_acumulada ] = probabilidad( initpop,func )
            error ('EPAAAAAAAAAAAAAAAAAAAAAAAA')
     end        
 
-    initpop = sortrows(P, -4);
+    initpop = sortrows(P, -(size(initpop,2)));
     
     suma_acumulada = cumsum(initpop(:,end));
 

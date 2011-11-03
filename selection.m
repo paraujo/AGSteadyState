@@ -1,4 +1,4 @@
-function [ newpop ] = sel( initpop, suma_acumulada )
+function [ newpop ] = selection( initpop, suma_acumulada )
 %SELECCION Summary of this function goes here
 
 S  = rand (1, size(initpop,1))

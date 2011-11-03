@@ -1,29 +1,32 @@
-function [ endpop ] = mutation( porcmut, initpop, bounds )
+function [ endpop ] = mutation( porcmut, initpop, bounds, popsize )
 %MUTACION Summary of this function goes here
 %   Detailed explanation goes here
 
 %-------------------------------------------------------------
 % step Mutation
 
-mutacion = round ((porcmut * size(initpop,1)) + 1)
+mutacion = round ((porcmut * popsize) + 1)
 
 for I = 1 : mutacion
     seleccion = round( rand * (size(initpop,1) - 1 )+ 1 );
 %fila seleccionada
-coordenada = round( funcion(1,size(bounds,1))) ;
+    coordenada = round( funcion(1,size(bounds,1))) ;
 %columna seleccionada
-direccion = round(funcion(1, size(bounds,2)));
+    direccion = round(funcion(1, size(bounds,2)));
 %genero un numero aleatorio entre 0 y 1
-s = round(rand());
+    s = round(rand());
 %genero el nuevo valor
-nuevovalor = s * initpop(seleccion,coordenada) + (1-s)*bounds(coordenada,direccion);
+    nuevovalor = s * initpop(seleccion,coordenada) + (1-s)*bounds(coordenada,direccion);
 %reemplazo para esa coordenada el nuevo valor del individuo
-initpop(seleccion,coordenada) = nuevovalor;
-    
+    initpop(seleccion,coordenada) = nuevovalor;
+        
+    mutpop(I,:) = [initpop(seleccion,1:end)];
+    initpop(seleccion,:) = [];
+     
 end
 
 %reeemplazo la poblacion 
-endpop = initpop;
+endpop = [initpop ; mutpop];
 
 end
 
