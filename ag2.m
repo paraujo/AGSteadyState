@@ -12,24 +12,17 @@ figure(1)
     plot(initpop(:,1),initpop(:,2),'bo');           
     grid on
 
-
 for i = 1 : generation
-    [initpop, suma_acumulada] = probabilidad(initpop, func)
-    elitepop = elite(initpop)
-    initpop = sel(initpop,suma_acumulada)
-    [cruzapop, initpop] = crossover(porcxover,initpop, func)
-    mutpop = step_mutation(porcmut,initpop, bounds, popsize);
     
-    mutpop = func(mutpop(:,1:end-1))
+    popseleccionada = selectionlocal(initpop, k, parejas)    
+    cruzapop = crossover(popseleccionada, func)
+    pobamutar = [cruzapop ; popseleccionada]
     
-    initpop = [cruzapop; mutpop];
-    initpop = sortrows(initpop, size(initpop,2))
+    mutpop = step_mutation(porcmut,pobamutar, bounds);    
+    mutpop = func(mutpop(:,1:end-1))   
     
-    for I = 1 : size(elitepop,1)
-     initpop(I,:) = [];     
-    end
+    initpop = reinsertar(mutpop, initpop, m)
     
-    initpop = [initpop ; elitepop]
 end
   
 endpop = initpop

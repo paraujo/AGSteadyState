@@ -1,11 +1,11 @@
-function [ endpop ] = mutation( porcmut, initpop, bounds, popsize )
+function [ endpop ] = mutation( porcmut, initpop, bounds )
 %MUTACION Summary of this function goes here
 %   Detailed explanation goes here
 
 %-------------------------------------------------------------
 % step Mutation
 
-mutacion = round ((porcmut * popsize) + 1)
+mutacion = round ((porcmut * size(initpop,1)) + 1)
 
 for I = 1 : mutacion
     seleccion = round( rand * (size(initpop,1) - 1 )+ 1 );
